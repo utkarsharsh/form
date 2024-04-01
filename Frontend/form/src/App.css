@@ -5,6 +5,7 @@
 .s{
   animation-name:utkarsh;
   animation-iteration-count: infinite;
+ 
   width: 20px;
   height: 20px;
  
@@ -13,7 +14,22 @@
   position: absolute;
   animation-duration: 10s;
 }
-
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button div{
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  animation-duration: 0.7s;
+  margin: 5px;
+  background-color: aliceblue;
+  animation-name:utkarsh2;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
 
 
 
@@ -29,4 +45,15 @@
    height: 30px;
   }
 }
-
+@keyframes utkarsh2{
+  0%{
+    transform: scale(1);
+    transition: ease-in-out;
+   
+  }
+  100%{
+    transform: scale(2);
+    transition: ease-in-out;
+   
+  }
+}

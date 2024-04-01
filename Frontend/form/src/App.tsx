@@ -1,21 +1,41 @@
 import { useState } from 'react'
 import './App.css'
-
+import axios from 'axios';
 
 function App() {
   interface data {
     name?:string,
     email?:string,
-    studentno?:string,
+    mobileno?:string,
     gender?:string,
-    residency?:string,
-    
+    residency?:string, 
   }
   const [form,setform]=useState<data>({gender:"male",residency:"dayscholar"});
+  const [ani,setani]=useState<Boolean>(false);
+ async function handleclick(){
   
-  function handleclick(){
-console.log(form);
+  setani(true);
+  let url:String=import.meta.env.VITE_URL;
+  console.log(url);
+  if(form.email && form.gender && form.name && form.mobileno){ 
+    let newurl:String=url+"/api/forminfo"
+    console.log(form);
+    const res:any =await axios.post(`${newurl}`,form, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }}
+  );
+    alert(res.data);
+    setani(false);
+    }
+    else {
+      alert("Fill all information properly");
+      setani(false);
+    }
   }
+
+
+
   let a:Array<String>=["1","2","4","2","5","6","5","6","2","3","5","8","2","1","3","4","2","5","4","6","7","3","1","2","4","2","5","6","5","6","2","3","5","1","3","4","2","5","4","1","2","4","2","5","6"]
   let b:Array<String>=["bg-gray-300","bg-sky-600"]
   return (
@@ -36,7 +56,7 @@ console.log(form);
        
    
 
-      <div className='flex flex-col absolute h-full w-full sm:w-5/6 md:h-2/3 lg:w-4/6 lg:h-3/5 bg-white z-10 ' >
+      <div className='flex flex-col absolute h-full w-full sm:w-5/6 md:h-2/3 lg:w-4/6 lg:h-3/5 bg-slate-100  z-10 rounded-lg' >
          <div className="flex mt-3">
           <h1 className=' text-center w-full font-semibold text-xl m-2'><span className='text-sky-600'>BIG DATA </span> <span className='text-gray-500'> CENTRE OF EXCELENCE </span></h1>
 
@@ -59,8 +79,8 @@ console.log(form);
                           )
           
           }}/>
-          <p className='ml-2' >Student no:</p>
-          <input type="text"  name='studentno' className=' m-2 border-solid border-4 rounded-lg mb-2' onChange={(e)=>{
+          <p className='ml-2' >Mobile no:</p>
+          <input type="text"  name='mobileno' className=' m-2 border-solid border-4 rounded-lg mb-2' onChange={(e)=>{
               setform({
                 ...form,[e.target.name]:e.target.value}
                           );
@@ -89,7 +109,14 @@ console.log(form);
           <option value="hostler">hostler</option>
           </select>
           
-          <button onClick={handleclick} className='m-2 w-5/6 md:w-full rounded-lg bg-sky-500 text-white'>Submit</button>
+          <button onClick={handleclick} className='m-2 w-5/6 md:w-full rounded-lg bg-sky-500 text-white'>
+            
+            
+            {ani?
+            <>
+           <div style={{animationDelay:"2s"}}></div><div style={{animationDelay:"1.5s"}}></div><div style={{animationDelay:"1s"}}></div><div style={{animationDelay:"0.5s"}}></div>
+            </>
+            :"Submit"}</button>
           </div>
          </div>
       </div>
